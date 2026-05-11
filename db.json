@@ -1,0 +1,133 @@
+{
+  "comandas": {
+    "001": {
+      "id": "001",
+      "participante": "Ana Lima",
+      "criadaEm": "2026-05-11T17:32:15.968Z",
+      "itens": [
+        {
+          "id": "1778520906239",
+          "produto": "test",
+          "quantidade": 1,
+          "valor": 11,
+          "vendedor": "Pedro",
+          "horario": "11/05/2026, 14:35:06"
+        }
+      ]
+    },
+    "002": {
+      "id": "002",
+      "participante": "Bruno Souza",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "003": {
+      "id": "003",
+      "participante": "Carla Menezes",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "004": {
+      "id": "004",
+      "participante": "Daniel Costa",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "005": {
+      "id": "005",
+      "participante": "Eduarda Ferreira",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "006": {
+      "id": "006",
+      "participante": "Felipe Martins",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "007": {
+      "id": "007",
+      "participante": "Gabriela Rocha",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "008": {
+      "id": "008",
+      "participante": "Henrique Alves",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "009": {
+      "id": "009",
+      "participante": "Isabela Nunes",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "010": {
+      "id": "010",
+      "participante": "João Pedro",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "011": {
+      "id": "011",
+      "participante": "Karina Santos",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "012": {
+      "id": "012",
+      "participante": "Lucas Oliveira",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "013": {
+      "id": "013",
+      "participante": "Mariana Dias",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "014": {
+      "id": "014",
+      "participante": "Nicolas Carvalho",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "015": {
+      "id": "015",
+      "participante": "Olivia Ramos",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "016": {
+      "id": "016",
+      "participante": "Pedro Henrique",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "017": {
+      "id": "017",
+      "participante": "Quezia Teixeira",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "018": {
+      "id": "018",
+      "participante": "Rafael Lima",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "019": {
+      "id": "019",
+      "participante": "Sara Fernandes",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    },
+    "020": {
+      "id": "020",
+      "participante": "Thiago Barbosa",
+      "criadaEm": "2026-05-11T17:32:15.969Z",
+      "itens": []
+    }
+  }
+}

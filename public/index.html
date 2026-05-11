@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Mercado EJC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Conteúdo renderizado pelo JS -->
+  </div>
+
+  <!-- TEMPLATE: Tela de Boas-vindas -->
+  <template id="tpl-home">
+    <div class="page page-home">
+      <div class="home-hero">
+        <div class="home-logo">🛒</div>
+        <h1 class="home-title">Mini Mercado<br/><span>EJC</span></h1>
+        <p class="home-sub">Sistema de Comandas</p>
+      </div>
+      <div class="home-cards">
+        <button class="card-btn card-vendedor" onclick="app.goto('/admin')">
+          <span class="card-icon">🏪</span>
+          <span class="card-label">Sou Vendedor</span>
+          <span class="card-desc">Acessar painel de vendas</span>
+        </button>
+        <button class="card-btn card-participante" onclick="app.goto('/buscar')">
+          <span class="card-icon">🙋</span>
+          <span class="card-label">Ver Minha Comanda</span>
+          <span class="card-desc">Buscar pelo meu nome</span>
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <!-- TEMPLATE: Tela de Comanda (participante) -->
+  <template id="tpl-comanda">
+    <div class="page page-comanda">
+      <div class="comanda-header">
+        <button class="btn-back" onclick="history.back()">← Voltar</button>
+        <div class="comanda-badge">Comanda #<span id="c-id"></span></div>
+      </div>
+
+      <div class="comanda-hero">
+        <div class="comanda-avatar" id="c-avatar"></div>
+        <h2 id="c-nome"></h2>
+        <p class="comanda-sub" id="c-criada"></p>
+      </div>
+
+      <!-- Botão para vendedor adicionar item -->
+      <div class="comanda-actions">
+        <button class="btn-primary btn-add-item" id="btn-abrir-form">
+          ＋ Registrar Venda
+        </button>
+      </div>
+
+      <!-- Formulário de adicionar item (oculto por padrão) -->
+      <div class="form-card" id="form-item" style="display:none">
+        <h3>Nova Venda</h3>
+        <div class="form-group">
+          <label>Produto *</label>
+          <input type="text" id="f-produto" placeholder="Ex: Refrigerante Lata" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantidade *</label>
+            <input type="number" id="f-qtd" placeholder="1" min="1" value="1" />
+          </div>
+          <div class="form-group">
+            <label>Valor Unitário (R$) *</label>
+            <input type="number" id="f-valor" placeholder="0.00" min="0" step="0.01" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Seu Nome (Vendedor) *</label>
+          <input type="text" id="f-vendedor" placeholder="Quem está vendendo?" autocomplete="off" />
+        </div>
+        <div class="form-row-btn">
+          <button class="btn-secondary" onclick="app.fecharForm()">Cancelar</button>
+          <button class="btn-primary" onclick="app.salvarItem()">Salvar Item</button>
+        </div>
+      </div>
+
+      <!-- Lista de itens -->
+      <div class="itens-section">
+        <h3 class="section-title">Itens Comprados</h3>
+        <div id="lista-itens">
+          <!-- Renderizado pelo JS -->
+        </div>
+      </div>
+
+      <!-- Rodapé com total e pagamento -->
+      <div class="comanda-footer" id="comanda-footer" style="display:none">
+        <div class="total-box">
+          <span>Total a Pagar</span>
+          <strong id="c-total"></strong>
+        </div>
+        <div class="pagamento-box">
+          <div class="pix-section">
+            <div class="pix-icon">💠</div>
+            <div>
+              <p class="pix-label">Chave PIX</p>
+              <p class="pix-key" id="pix-key" onclick="app.copiarPix()"></p>
+              <small>Toque para copiar</small>
+            </div>
+          </div>
+          <div class="comprovante-section">
+            <p>📲 Após pagar, envie o comprovante para:</p>
+            <a class="whatsapp-btn" id="whatsapp-link" href="#" target="_blank">
+              WhatsApp → <span id="wp-num"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- TEMPLATE: Admin / Lista de Comandas -->
+  <template id="tpl-admin">
+    <div class="page page-admin">
+      <div class="admin-header">
+        <button class="btn-back" onclick="app.goto('/')">← Início</button>
+        <h2>Painel do Vendedor</h2>
+        <button class="btn-icon" onclick="app.abrirRelatorio()" title="Relatório">📊</button>
+      </div>
+
+      <div class="search-box">
+        <input type="search" id="busca-admin" placeholder="🔍 Buscar participante..." oninput="app.filtrarComandas(this.value)" autocomplete="off" />
+      </div>
+
+      <div class="btn-nova-comanda-wrap">
+        <button class="btn-primary" onclick="app.abrirNovaComanda()">＋ Nova Comanda</button>
+      </div>
+
+      <div id="admin-lista" class="admin-lista">
+        <!-- Renderizado pelo JS -->
+      </div>
+    </div>
+  </template>
+
+  <!-- TEMPLATE: Tela de Busca por Nome -->
+  <template id="tpl-buscar">
+    <div class="page page-buscar">
+      <div class="admin-header">
+        <button class="btn-back" onclick="app.goto('/')">← Início</button>
+        <h2>Buscar Comanda</h2>
+      </div>
+      <div class="buscar-hero">
+        <p>Digite seu nome para encontrar sua comanda:</p>
+        <div class="search-box">
+          <input type="search" id="busca-nome" placeholder="Seu nome..." oninput="app.filtrarBusca(this.value)" autocomplete="off" autofocus />
+        </div>
+      </div>
+      <div id="busca-lista" class="admin-lista"></div>
+    </div>
+  </template>
+
+  <!-- TEMPLATE: QR Code de uma comanda -->
+  <template id="tpl-qr">
+    <div class="page page-qr">
+      <div class="admin-header">
+        <button class="btn-back" onclick="history.back()">← Voltar</button>
+        <h2>QR Code</h2>
+      </div>
+      <div class="qr-card">
+        <div class="qr-participante" id="qr-nome"></div>
+        <div class="qr-badge">Comanda #<span id="qr-id"></span></div>
+        <img id="qr-img" class="qr-img" src="" alt="QR Code" />
+        <p class="qr-url" id="qr-url"></p>
+        <p class="qr-hint">📱 Escaneie para acessar a comanda</p>
+        <button class="btn-primary" onclick="window.print()">🖨️ Imprimir</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- TEMPLATE: Relatório -->
+  <template id="tpl-relatorio">
+    <div class="page page-relatorio">
+      <div class="admin-header">
+        <button class="btn-back" onclick="history.back()">← Voltar</button>
+        <h2>Relatório Geral</h2>
+      </div>
+      <div id="relatorio-content" class="relatorio-content">
+        <div class="loading">Carregando...</div>
+      </div>
+    </div>
+  </template>
+
+  <!-- MODAL: Nova Comanda -->
+  <div class="modal-overlay" id="modal-nova" style="display:none">
+    <div class="modal">
+      <h3>Nova Comanda</h3>
+      <div class="form-group">
+        <label>Nome do Participante *</label>
+        <input type="text" id="m-participante" placeholder="Nome completo" autocomplete="off" />
+      </div>
+      <div class="form-row-btn">
+        <button class="btn-secondary" onclick="app.fecharModal()">Cancelar</button>
+        <button class="btn-primary" onclick="app.criarComanda()">Criar Comanda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/script.js"></script>
+</body>
+</html>

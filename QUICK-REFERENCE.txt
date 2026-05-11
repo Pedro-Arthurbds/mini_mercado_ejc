@@ -1,0 +1,212 @@
+# ⚡ Referência Rápida — Cartão de Bolso
+
+Imprima ou salve no celular para consultar rápido durante o evento.
+
+---
+
+## 🚀 Começar
+
+```bash
+npm install    # 1ª vez apenas
+npm start      # rodar servidor
+```
+
+**Servidor rodando em:** `http://localhost:3000`
+
+---
+
+## 📱 URLs Principais
+
+```
+HOME               http://localhost:3000
+VENDEDOR (Admin)   http://localhost:3000/admin
+BUSCAR COMANDA     http://localhost:3000/buscar
+COMANDA (#001)     http://localhost:3000/comanda/001
+QR CODE (#001)     http://localhost:3000/qr/001
+RELATÓRIO          http://localhost:3000/api/relatorio
+```
+
+**Em Rede Local (celular):**
+Troque `localhost` por IP (ex: `192.168.1.100`)
+
+---
+
+## 🎮 Fluxo de Uso
+
+### Vendedor
+1. Acessa `/admin`
+2. Busca participante
+3. Clica no nome
+4. "+ Registrar Venda"
+5. Preenche e salva
+
+### Participante
+1. Escaneia QR Code
+2. Vê comanda
+3. Toca PIX (copia)
+4. Vai no banco
+5. Paga
+6. Envia WhatsApp
+
+---
+
+## ⚙️ Configurações (server.js)
+
+```javascript
+pixKey: '27999370750'      // chave PIX
+whatsapp: '27999370750'    // número WhatsApp
+eventName: 'Mini Mercado EJC'
+```
+
+---
+
+## 📊 APIs Rápidas
+
+```bash
+# Listar todas
+curl http://localhost:3000/api/comandas
+
+# Detalhes comanda #001
+curl http://localhost:3000/api/comanda/001
+
+# Relatório
+curl http://localhost:3000/api/relatorio
+
+# QR Code
+curl http://localhost:3000/api/qr/001
+```
+
+---
+
+## 🆘 Problemas Comuns
+
+| Erro | Solução |
+|------|---------|
+| Porta em uso | `PORT=4000 npm start` |
+| npm não existe | Instalar Node.js |
+| Comandas vazias | `rm db.json && npm start` |
+| Servidor cai | `Ctrl+C` e `npm start` |
+| QR não abre | Recarregar página (F5) |
+| Sem internet | Usar IP local |
+
+---
+
+## 📋 Participantes Pré-Cadastrados
+
+```
+001 Ana Lima           011 Karina Santos
+002 Bruno Souza        012 Lucas Oliveira
+003 Carla Menezes      013 Mariana Dias
+004 Daniel Costa       014 Nicolas Carvalho
+005 Eduarda Ferreira   015 Olivia Ramos
+006 Felipe Martins     016 Pedro Henrique
+007 Gabriela Rocha     017 Quezia Teixeira
+008 Henrique Alves     018 Rafael Lima
+009 Isabela Nunes      019 Sara Fernandes
+010 João Pedro         020 Thiago Barbosa
+```
+
+---
+
+## 🔍 Encontrar IP Local
+
+**Windows:**
+```bash
+ipconfig
+```
+Procure por: `IPv4 Address: 192.168.X.X`
+
+**macOS/Linux:**
+```bash
+ifconfig | grep "inet "
+```
+
+---
+
+## 🎯 Checklist Evento
+
+- [ ] Servidor rodando (`npm start`)
+- [ ] WiFi OK
+- [ ] IP local anotado
+- [ ] Testes com celular
+- [ ] QR Codes impressos
+- [ ] PIX/WhatsApp corretos
+- [ ] Backup db.json
+
+---
+
+## 📱 Copie para Celular
+
+```
+http://192.168.1.100:3000/admin
+(trocar IP pelo seu)
+```
+
+---
+
+## 🚨 Emergência
+
+```bash
+# Server crash?
+Ctrl+C
+npm start
+
+# Dados corrompidos?
+rm db.json
+npm start
+
+# Porta ocupada?
+PORT=4000 npm start
+```
+
+---
+
+## 💾 Backup
+
+```bash
+# Fazer backup
+cp db.json db.json.backup
+
+# Restaurar
+cp db.json.backup db.json
+```
+
+---
+
+## 🖥️ Estrutura Arquivos
+
+```
+comanda-system/
+├── server.js (backend)
+├── package.json
+└── public/
+    ├── index.html (frontend)
+    ├── style.css
+    └── script.js
+```
+
+---
+
+## 📖 Documentação
+
+- **README.md** → Tudo sobre o sistema
+- **QUICKSTART.md** → 3 passos rápido
+- **INSTALLATION.md** → Instalar por SO
+- **NETWORK-CONFIG.md** → IP e WiFi
+- **QR-CODES.md** → Gerar QR Codes
+- **EVENT-OPERATIONS.md** → No evento
+- **CUSTOMIZATION.md** → Alterar código
+- **SUMMARY.md** → Resumo completo
+
+---
+
+## 🎉 Dicas
+
+✅ Não feche o terminal onde roda `npm start`  
+✅ Faça backup a cada 2 horas  
+✅ Teste tudo antes do evento  
+✅ Mantenha carregador perto  
+
+---
+
+**Imprime e leva! 📋**
